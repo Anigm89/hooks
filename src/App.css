@@ -3,6 +3,12 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+
 }
 
 .logo {
@@ -39,4 +45,11 @@
 
 .read-the-docs {
   color: #888;
+}
+
+img{
+  width: 250px;
+}
+p{
+  text-transform: capitalize;
 }
