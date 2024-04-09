@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 
 function useFetchCharacters(url) {
-    const [nombre, setNombre ] = useState('');
-    const [img, setImg ] = useState('');
+    const [character, setCharacter ] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError ] = useState(null)
 
     useEffect(() => {
         const BuscarPersonaje = async () => {
@@ -15,23 +16,18 @@ function useFetchCharacters(url) {
                 }
                 
                 const data = await response.json();
-                setNombre(data.name);
-
-                if(url.includes('pokeapi')){
-                    setImg(data.sprites.other['official-artwork'].front_default)
-                }
-                else{
-                    setImg(data.image)
-                }
+                setCharacter(data);
+                setLoading(false)
             }
-            catch(error){
-                console.error('Ha ocurrido un error al conectar con la API', error)
+            catch(err){
+                setError(err)
+                console.log('Ha ocurrido un error al conectar con la API', error)
             }
         };
         BuscarPersonaje();
-    }, []);
+    }, [url]);
 
-    return { nombre, img }     
+    return { character, loading }     
 }
 
 export default useFetchCharacters;
